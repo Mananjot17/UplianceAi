@@ -1,14 +1,10 @@
 import "./App.css";
-import Counter from "./components/Counter";
-import RichTextEditor from "./components/TextEditor";
-import UserForm from "./components/UserForm";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   return (
     <div>
-      <Counter />
-      <UserForm />
-      <RichTextEditor />
+      <Dashboard />
     </div>
   );
 }
