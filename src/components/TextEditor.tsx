@@ -2,7 +2,19 @@ import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const RichTextEditor = ({ userData }: any) => {
+// Define the types for the userData prop
+interface UserData {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+}
+
+interface RichTextEditorProps {
+  userData: UserData;
+}
+
+const RichTextEditor: React.FC<RichTextEditorProps> = ({ userData }) => {
   // Create content with user data formatted as HTML
   const initialContent = `
     <h2>User Profile</h2>
@@ -12,7 +24,7 @@ const RichTextEditor = ({ userData }: any) => {
     <p><strong>Address:</strong> ${userData.address || "N/A"}</p>
   `;
 
-  const [content, setContent] = useState(initialContent);
+  const [content, setContent] = useState<string>(initialContent);
 
   useEffect(() => {
     // Update the content when userData changes

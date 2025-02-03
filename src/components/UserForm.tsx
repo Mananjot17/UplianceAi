@@ -7,9 +7,23 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-const UserForm = ({ userData, setUserData }: any) => {
-  const [formData, setFormData] = useState(userData);
-  const [isDirty, setIsDirty] = useState(false);
+// Define the types for the userData prop (including id)
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+}
+
+interface UserFormProps {
+  userData: UserData;
+  setUserData: (data: UserData) => void; // Ensure this matches the type of `userData`
+}
+
+const UserForm: React.FC<UserFormProps> = ({ userData, setUserData }) => {
+  const [formData, setFormData] = useState<UserData>(userData);
+  const [isDirty, setIsDirty] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // Handle form input changes
@@ -32,9 +46,19 @@ const UserForm = ({ userData, setUserData }: any) => {
     }
 
     // Save data to parent component and localStorage
-    setUserData(formData);
+    setUserData(formData); // Passing full UserData object
     localStorage.setItem("userData", JSON.stringify(formData));
+
+    // Clear the form data after submission
+    setFormData({
+      id: "", // Reset the id too (or generate a new one if necessary)
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+    });
     setIsDirty(false); // Reset dirty flag after saving
+    setError(null); // Clear error if any
   };
 
   // Listen to beforeunload to show alert if there are unsaved changes

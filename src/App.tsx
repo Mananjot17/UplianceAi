@@ -1,12 +1,13 @@
 import "./App.css";
+import AuthPage from "./Pages/AuthPage";
 import Dashboard from "./Pages/Dashboard";
-import { SignInButton, SignedIn, SignedOut } from "@clerk/react-router";
+import { SignedIn, SignedOut } from "@clerk/react-router";
 
 function App() {
   return (
     <div>
       <SignedOut>
-        <SignInButton />
+        <AuthPage />
       </SignedOut>
       <SignedIn>
         <Dashboard />

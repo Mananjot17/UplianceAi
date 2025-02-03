@@ -1,17 +1,15 @@
-import { useState } from "react";
-import { animated, useSpring } from "react-spring";
+import { animated } from "react-spring";
 import { Button, Box } from "@mui/material";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
+// Define the types for the props
+interface CounterProps {
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+}
 
-  const backgroundAnimation = useSpring({
-    backgroundColor: `rgba(0, 150, 255, ${count / 100})`,
-    config: { tension: 200, friction: 25 },
-  });
-
+const Counter: React.FC<CounterProps> = ({ count, setCount }) => {
   return (
-    <animated.div style={{ ...backgroundAnimation }}>
+    <animated.div>
       <Box
         display="flex"
         alignItems="center"
